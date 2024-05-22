@@ -1,0 +1,82 @@
+<html>
+<head>
+  <title>University Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">University Search</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br/>
+  <div
+  class="bg-image"
+  style="
+    background-image: url('https://freerangestock.com/sample/120012/search-icon-vector.jpg');
+    height: 100vh;
+  ">
+  <div class="container">
+
+    {% if name %}
+      <h1>Salaries</h1>
+      <br/><br/><br/>
+      <table class="table table-hover table-bordered table-striped">
+      {for % our_result in our_results %}
+          {{our_result.id}} - {{our_result.university}} - {{our_result.job}} - {{our_result.company}} - {{our_result.avgsalary}} - {{our_result.salaryrange}} - {{our_result.date_added}}
+      { % endfor %}
+    </table>
+    {% else %}
+    <div class="shadow p-3 mb-5 bg-body rounded">
+      <h1>University List:</h1>
+      <br/>
+      <form method="POST">
+        {{form.hidden_tag()}}
+        {{form.university.label(class="form-label")}}
+        {{form.university(class="form-control")}}
+        <br/>
+        {{form.submit(class="btn btn-primary")}}
+      </form>
+    </div>
+    <br/><br/><br/>
+    <table class="table table-hover table-bordered table-striped">
+    {for % our_result in our_results %}
+        {{our_result.id}} - {{our_result.university}} - {{our_result.job}} - {{our_result.company}} - {{our_result.avgsalary}} - {{our_result.salaryrange}} - {{our_result.date_added}}
+    { % endfor %}
+    </table>
+    {% endif %}
+
+        
+    
+      
+  </div>
+</div>
+</body>
+</html>

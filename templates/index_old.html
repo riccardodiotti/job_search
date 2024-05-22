@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<head>
+  <title>University Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row height d-flex justify-content-center align-items-center">
+
+      <div class="col-md-8">
+
+        <div class="result" method="POST">
+          <input type="text" name ="university" class="form-control" id="autocomplete" placeholder="Search School - University">
+          <p><button type="submit" value="submit">Search</p>
+        </div>
+        
+      </div>
+      
+    </div>
+</div>
+<script>
+  $('#autocomplete').autocomplete({
+      serviceUrl: '/search/university',
+      dataType: 'json',
+      onSearchComplete: function (query, suggestions) {
+        console.log(query);
+      }
+  });
+  </script>
+</body>
+</html>

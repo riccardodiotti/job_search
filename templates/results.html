@@ -1,0 +1,121 @@
+<html>
+<head>
+  <title>Job Search</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+  <style>
+  body {
+    background-image: url('image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+   }
+   h1 {
+   text-align:center;
+   color:  white;
+   }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Job Search</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Home</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <br/>
+  <div
+  class="bg-image"
+  style="
+    background-image: url('https://static.vecteezy.com/system/resources/previews/007/621/325/non_2x/blue-wave-abstract-background-web-background-blue-texture-banner-design-creative-cover-design-backdrop-minimal-background-illustration-vector.jpg');
+    height: 100vh;
+    background-size:100% 100%;
+  ">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/" color="white">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page" color="white">Search</li>
+    </ol>
+  </nav>
+  <div class="container align-items-center">
+    <div class="alert alert-success alert-dismissible fade show" role="success">
+      {% for message in get_flashed_messages() %}
+        {{message}}
+      {% endfor %}
+      </div>
+      <br/>
+      <h2>You searched for:</h2>
+      <p>Job=<em>{{job_description}}</em></p>
+      <p>Location=<em> {{location}}</em></p>
+      </br>
+      <h1>Salaries</h1>
+      <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+      <table class="table table-hover">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">University</th>
+        <th scope="col">Job</th>
+        <th scope="col">Reliability</th>
+        <th scope="col">Salary Range</th>
+        <th scope="col">Base Salary</th>
+        <th scope="col">Additional Salary</th>
+        <th scope="col">Avg_Salary</th>
+        <th scope="col">Date_Added</th>
+        <th scope="col">Last_Refresh</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for r in rows_results %}
+        <tr>
+          {% for d in r %}
+            <td>{{ d }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <div class="shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <table class="table table-hover">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Job</th>
+        <th scope="col">Location</th>
+        <th scope="col">Company</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Last_Refresh</th>
+      </tr>
+      </thead>
+      <tbody>
+        {% for r1 in rows_salaries %}
+        <tr>
+          {% for e in r1 %}
+            <td>{{ e }}</td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  </div>
+  <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width=1100 alt="University">
+  <br/>
+  <div class="col-auto">
+    <a class="btn btn-primary" href="/" role="button" style="width:800px; margin:0 auto;">Back</a>
+  </div>
+</div>
+</body>
+</html>

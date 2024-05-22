@@ -25,7 +25,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "Quasimodo12"
 #app.permanent_session_lifetime = timedelta(minutes=5)
 #db = MySQL(app)
-database_url = 'postgres://u8ok4t688g05br:p983f0fd07ee81aadcaa0cd4bb735b63b243045c07bf1b8ba49607dcc79129a53@c97r84s7psuajm.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d8p6bnpqnneug2'
+database_url = 'postgresql://u8ok4t688g05br:p983f0fd07ee81aadcaa0cd4bb735b63b243045c07bf1b8ba49607dcc79129a53@c97r84s7psuajm.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d8p6bnpqnneug2'
 app.config['SQLALCHEMY_DATABASE_URI'] = database_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)

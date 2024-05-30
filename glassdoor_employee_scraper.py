@@ -25,6 +25,7 @@ def login(driver):
     line = login.readlines()
     email = line[0]
     password = line[1]
+    driver.implicitly_wait(6)
     driver.get("https://www.glassdoor.com/index.htm")
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
     your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
@@ -42,6 +43,7 @@ def login(driver):
     driver.execute_script("arguments[0].click();", loginbutton)
 
 def getSalaries(driver,keyword,location):
+    driver.implicitly_wait(6)
     driver.get("https://www.glassdoor.com/salaries/index.htm")
     sleep(1)
     searchbox = driver.find_element(By.NAME, "typedKeyword")
@@ -116,6 +118,14 @@ def getSalaries(driver,keyword,location):
 def exec(keyword,location):
     service = Service(executable_path='./chromedriver.exe')
     options = webdriver.ChromeOptions()
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--disable-extensions')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--user-agent={}'.format(random.choice(list(self.user_agents))))
+    options.add_argument(“–disable-dev-shm-usage”)
     options.add_argument("start-maximized")
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')

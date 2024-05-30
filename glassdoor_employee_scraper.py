@@ -28,14 +28,14 @@ def login(driver):
     driver.implicitly_wait(6)
     driver.get("https://www.glassdoor.com/index.htm")
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
-    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
-                        .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
+    #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
+    #                    .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
 
     eml = driver.find_element(By.ID, "inlineUserEmail")
     eml.send_keys(email)
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
-    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
-                        .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
+    #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
+    #                    .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
     passwd = driver.find_element(By.ID, "inlineUserPassword")
     passwd.send_keys(password)
     sleep(2)

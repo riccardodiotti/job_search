@@ -25,14 +25,16 @@ def login(driver):
     line = login.readlines()
     email = line[0]
     password = line[1]
-    driver.implicitly_wait(6)
+    driver.implicitly_wait(10)
     driver.get("https://www.glassdoor.com/index.htm")
+    driver.implicitly_wait(10)
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
 
     eml = driver.find_element(By.ID, "inlineUserEmail")
     eml.send_keys(email)
+    driver.implicitly_wait(10)
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
@@ -43,7 +45,7 @@ def login(driver):
     driver.execute_script("arguments[0].click();", loginbutton)
 
 def getSalaries(driver,keyword,location):
-    driver.implicitly_wait(6)
+    driver.implicitly_wait(10)
     driver.get("https://www.glassdoor.com/salaries/index.htm")
     sleep(1)
     searchbox = driver.find_element(By.NAME, "typedKeyword")

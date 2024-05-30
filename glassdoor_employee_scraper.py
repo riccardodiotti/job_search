@@ -21,7 +21,7 @@ import MySQLdb
 
 # Login
 def login(driver):
-    login = open('C:\\Users\\ricca\\Downloads\\Linkedin Project_1704\\uni_job_search\\login.txt') # this is your linkedin account login, store in a seperate text file. I recommend creating a fake account so your real one dosen't get flagged or banned
+    login = open('/login.txt') # this is your linkedin account login, store in a seperate text file. I recommend creating a fake account so your real one dosen't get flagged or banned
     line = login.readlines()
     email = line[0]
     password = line[1]

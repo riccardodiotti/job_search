@@ -72,29 +72,35 @@ def getSalaries(driver,keyword,location):
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     source = BeautifulSoup(driver.page_source,'html.parser')
     overall_salary = [ ]
-    if source.find('div', attrs={'data-test': 'occ-median-update-date'})  is not None:
-        update_date = source.find('div', attrs={'data-test': 'occ-median-update-date'}).text #update_date
-    else:
-        update_date = 'None'#update_date
-    if driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']")  is not None:
-        confidence = driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']").text #confidence
-    else:
-        confidence = 'None'#confidence
-    if driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']")  is not None:
-        total_salary = source.find('div', attrs={'data-test': 'total-pay'}).text #total pay
-    else:
+    try:
+        if source.find('div', attrs={'data-test': 'occ-median-update-date'})  is not None:
+            update_date = source.find('div', attrs={'data-test': 'occ-median-update-date'}).text #update_date
+    except Exception:
+        update_date = 'None'
+    try:
+        if driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']")  is not None:
+            confidence = driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']").text #confidence
+    except Exception:
+        confidence = 'None'
+    try:
+        if driver.find_element(By.XPATH,"//aside[@data-test='confidence-badge']")  is not None:
+            total_salary = source.find('div', attrs={'data-test': 'total-pay'}).text #total pay
+    except Exception:
         total_salary = 'None'#total pay
-    if source.find('div', attrs={'data-test': 'base-pay'})  is not None:
-        base_salary = source.find('div', attrs={'data-test': 'base-pay'}).text #base pay
-    else:
+    try:
+        if source.find('div', attrs={'data-test': 'base-pay'})  is not None:
+            base_salary = source.find('div', attrs={'data-test': 'base-pay'}).text #base pay
+    except Exception:
         base_salary = 'None'#base pay
-    if source.find('div', attrs={'data-test': 'additional-pay-breakdown-only-one'})  is not None:
-        additional_salary = source.find('div', attrs={'data-test': 'additional-pay-breakdown-only-one'}).text #additional pay
-    else:
-        additional_salary = 'None'#additional pay 
-    if source.find('div', {'class': 'mb-xxsm d-flex align-items-baseline css-16x4inx ekyprye1'})  is not None:
-        avg_salary = source.find('div', {'class': 'mb-xxsm d-flex align-items-baseline css-16x4inx ekyprye1'}).text #avg pay
-    else:
+    try:
+        if source.find('div', attrs={'data-test': 'additional-pay-breakdown-only-one'})  is not None:
+            additional_salary = source.find('div', attrs={'data-test': 'additional-pay-breakdown-only-one'}).text #additional pay
+    except Exception:
+        additional_salary = 'None'#additional pay
+    try:
+        if source.find('div', {'class': 'mb-xxsm d-flex align-items-baseline css-16x4inx ekyprye1'})  is not None:
+            avg_salary = source.find('div', {'class': 'mb-xxsm d-flex align-items-baseline css-16x4inx ekyprye1'}).text #avg pay
+    except Exception:
         avg_salary = 'None'#avg pay
     datet = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     overall_salary.append({'Job': keyword,

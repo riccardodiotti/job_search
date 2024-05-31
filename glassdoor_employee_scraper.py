@@ -18,6 +18,7 @@ import numpy as np
 from sqlalchemy import create_engine
 from datetime import datetime
 import MySQLdb
+import psycopg2
 
 # Login
 def login(driver):

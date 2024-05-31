@@ -130,6 +130,9 @@ def exec(keyword,location):
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('log-level=3')
+    options.add_argument("--headless")
+    options.add_argument(
+    "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
     driver = webdriver.Chrome(options=options)
     sleep(3)
     login(driver)

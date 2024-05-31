@@ -163,24 +163,36 @@ def exec(keyword,location):
         print(df)
         df2 = pd.DataFrame(data=employers)
         print(df2)
-        db = MySQLdb.connect(host="localhost",    # your host, usually localhost
-                     user="root",         # your username
-                     passwd="1234",  # your password
-                     db="database")
-
-        print('Connected to MySQL database')
-        c = db.cursor()
-        c.executemany("""
-        INSERT INTO results (Job, Location, Confidence, Total_Salary, Base_Salary, Additional_Salary, Avg_Salary, Date_Added, Datetime)
+        connection = psycopg2.connect(
+            host='dpg-cp5mkif79t8c73f18p3g-a.oregon-postgres.render.com',
+            database='database_w735',
+            user='database_w735_user',
+            password='iqjLCkkaNAgNcNRdMu1OyLz2l71s5TBS'
+        )
+        #db = MySQLdb.connect(host="localhost",    # your host, usually localhost
+        #             user="root",         # your username
+        #             passwd="1234",  # your password
+        #             db="database")
+        #   
+        print('Connected to PosgreSQL database')
+        #c = db.cursor()
+        cursor = connection.cursor()
+        cursor.executemany("""
+        INSERT INTO public.results (Job, Location, Confidence, Total_Salary, Base_Salary, Additional_Salary, Avg_Salary, Date_Added, Datetime)
         VALUES (%(Job)s, %(Location)s, %(Confidence)s, %(Total_Salary)s, %(Base_Salary)s,%(Additional_Salary)s,%(Avg_Salary)s, %(Date_Added)s, %(Datetime)s)""", overall_salary)
-        c.executemany("""
-        INSERT INTO salary_employers (Job, Location, Company, Salary, Datetime)
+        cursor.executemany("""
+        INSERT INTO public.salary_employers (Job, Location, Company, Salary, Datetime)
         VALUES (%(Job)s, %(Location)s, %(Company)s, %(Salary)s, %(Datetime)s)""", employers)
-        db.commit()
+        connection.commit()
+        #db.commit()
         print("Data inserted correctly!")
+        if cursor:
+            cursor.close()
+        if connection:
+            connection.close()
     except Exception as e:
         print(e)
-        return("Server insertion error! Redirected to Home")
+        return("Error while connecting to PostgreSQL! Redirected to Home")
     driver.quit()
     display = "New record created successfully! Redirected to Home"
     return (display)

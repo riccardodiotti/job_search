@@ -8,7 +8,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
   <style>
   body {
-    background-image: url('image.jpg');
+    background-image: url('green-gradient-background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
    }
@@ -16,11 +16,17 @@
    text-align:center;
    color:  white;
    }
+   img {
+    border-radius: 16%;
+    }
+    .col-auto{
+    text-align: center;
+    }
   </style>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
+    <div class="container">
       <a class="navbar-brand" href="/">Job Search</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -30,25 +36,27 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="/">Home</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Privacy Policy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Subscribe</a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
   <br/>
-  <div
-  class="bg-image"
-  style="
-    background-image: url('https://static.vecteezy.com/system/resources/previews/007/621/325/non_2x/blue-wave-abstract-background-web-background-blue-texture-banner-design-creative-cover-design-backdrop-minimal-background-illustration-vector.jpg');
-    height: 100vh;
-    background-size:100% 100%;
-  ">
-  <nav aria-label="breadcrumb">
+  <div class="container align-items-center">
+  <nav aria-label="breadcrumb" nav style="--bs-breadcrumb-divider: '>'">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/" color="white">Home</a></li>
-      <li class="breadcrumb-item active" aria-current="page" color="white">Search</li>
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Search</li>
     </ol>
   </nav>
-  <div class="container align-items-center">
     <div class="alert alert-success alert-dismissible fade show" role="success">
       {% for message in get_flashed_messages() %}
         {{message}}
@@ -110,12 +118,14 @@
       </tbody>
     </table>
   </div>
+  </br>
+  <img src="image.jpg" width=1100 alt="University">
   </div>
-  <img src="https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" width=1100 alt="University">
-  <br/>
+  </br>
   <div class="col-auto">
     <a class="btn btn-primary" href="/" role="button" style="width:800px; margin:0 auto;">Back</a>
   </div>
+  </br>
 </div>
 </body>
 </html>

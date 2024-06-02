@@ -149,7 +149,7 @@ def exec(keyword,location):
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('log-level=3')
-    options.addArguments("disable-infobars")
+    options.add_argument('disable-infobars')
     options.add_argument('--remote-debugging-pipe')
     driver = webdriver.Chrome(options=options)
     sleep(3)

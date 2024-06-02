@@ -162,7 +162,7 @@ def exec(keyword,location):
         overall_salary, salary_employers = getSalaries(driver,keyword,location)
         df = pd.DataFrame(data=overall_salary)
         print(df)
-        df2 = pd.DataFrame(data=employers)
+        df2 = pd.DataFrame(data=salary_employers)
         print(df2)
         connection = psycopg2.connect(
             host='dpg-cp5mkif79t8c73f18p3g-a.oregon-postgres.render.com',

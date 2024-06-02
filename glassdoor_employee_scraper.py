@@ -155,6 +155,7 @@ def exec(keyword,location):
     options.add_argument('--remote-debugging-pipe')
     options.add_argument('--disable-infobars')
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_argument("--dns-prefetch-disable")
     options.add_experimental_option('useAutomationExtension', False)
     driver = webdriver.Chrome(options=options)
     driver.manage().timeouts().setScriptTimeout(360, TimeUnit.SECONDS);

@@ -9,11 +9,17 @@
      background-size: cover;
     }
     img {
-  border-radius: 16%;
+    border-radius: 16%;
     }
     h1 {
     text-align:center;
     color:  white;
+    }
+    .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
     }
     .col-auto{
     text-align: center;
@@ -183,7 +189,7 @@
       <div class="col-auto">
         <input id="submit" type="submit" value="Search" class="btn btn-primary btn-lg" style="width:800px; margin:0 auto;">
       </div>
-      <img id="myspinner" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnNiNjkxM3RmcjhjZmVzYzQzZjVhMDY0Y3NvYzVsODhqZ214M2JycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Searching, please wait" style="display:none;"/>
+      <img id="myspinner" src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnNiNjkxM3RmcjhjZmVzYzQzZjVhMDY0Y3NvYzVsODhqZ214M2JycSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oEjI6SIIHBdRxXI40/giphy.gif" class="center" alt="Searching, please wait" style="display:none;"/>
       </form>
     </div>
 
@@ -195,7 +201,7 @@
     setTimeout(() => {
         document.getElementById('myspinner').style.display = 'none'; // Hide the spinner after the request is complete
         //this.submit(); // Submit the form the traditional way
-    }, 120000); // Simulate a 2 second delay (remove or modify as needed)
+    }, 180000); // Simulate a 2 second delay (remove or modify as needed)
     });
     </script>
 </body>

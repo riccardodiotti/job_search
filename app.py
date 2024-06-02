@@ -7,8 +7,6 @@ from wtforms import SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired, AnyOf
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
-from flask_mysqldb import MySQL
-import mysql.connector
 import sqlite3
 from glassdoor_employee_scraper import *
 from sqlalchemy import text
@@ -92,7 +90,7 @@ def search_database(searchkey1,searchkey2):
     searchkeystr1 = str(searchkey1)
     searchkeystr2 = str(searchkey2)
     result = conn.execute(
-            text("SELECT * FROM public.results WHERE Job = :job AND Location = :location"),
+            text("SELECT id,job,location,confidence,total_salary, base_salary,additional_salary, avg_salary,date_added, datetime FROM public.results WHERE Job = :job AND Location = :location"),
             {'job': searchkeystr1, 'location': searchkeystr2}
         )
     #cursor.execute("""SELECT * FROM results WHERE Job = %s AND Location = %s""",(searchkeystr1,searchkeystr2,))
@@ -101,7 +99,7 @@ def search_database(searchkey1,searchkey2):
     results = result.fetchall()
     #cursor.execute("""SELECT * FROM salary_employers WHERE Job = %s AND Location = %s""",(searchkeystr1,searchkeystr2,))
     salary_employers = conn.execute(
-            text("SELECT * FROM public.salary_employers WHERE Job = :job AND Location = :location"),
+            text("SELECT id, job, location, company, salary, datetime FROM public.salary_employers WHERE Job = :job AND Location = :location"),
             {'job': searchkeystr1, 'location': searchkeystr2}
         )
     conn.close()
@@ -142,7 +140,7 @@ def search():
     print(searchkey2)
     #cursor.execute("""SELECT * FROM results WHERE Job = %s AND Location = %s""",(searchkeystr1,searchkeystr2,))
     result = conn.execute(
-            text("SELECT * FROM public.results WHERE job = :job AND location = :location"),
+            text("SELECT id,job,location,confidence,total_salary, base_salary,additional_salary, avg_salary,date_added, datetime FROM public.results WHERE job = :job AND location = :location"),
             {'job': searchkeystr1, 'location': searchkeystr2}
         )
     #msg = cursor.fetchone() 
@@ -169,29 +167,4 @@ def internal_error(error):
 @app.errorhandler(404)
 def pageNotFound(error):
     return "page not found"
-
-class Results():
-    def __init__(self, id, name, university, job, company, avgsalary, salaryrange, date_added):
-        self.id = id
-        self.name = name
-        self.university = university
-        self.job = job
-        self.company = company
-        self.avgsalary = avgsalary
-        self.salaryrange = salaryrange
-        self.date_added = date_added
-
-    def save(self):
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO public.results (name, university, job, company) VALUES (%s, %s, %s, %s)", 
-                    (self.name, self.university, self.job, self.company))
-        mysql.connection.commit()
-        cur.close()
-
-    def fetch_all():
-        cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM results.results")
-        data = cur.fetchall()
-        cur.close()
-        return data
 

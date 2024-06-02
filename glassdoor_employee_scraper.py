@@ -149,17 +149,14 @@ def exec(keyword,location):
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('log-level=3')
-    options.add_argument("--headless")
-    options.add_argument(
-    "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36")
     driver = webdriver.Chrome(options=options)
     sleep(3)
     login(driver)
     sleep(5)
     try:
         overall_salary = [ ]
-        employers = [ ]
-        overall_salary, employers = getSalaries(driver,keyword,location)
+        salary_employers = [ ]
+        overall_salary, salary_employers = getSalaries(driver,keyword,location)
         df = pd.DataFrame(data=overall_salary)
         print(df)
         df2 = pd.DataFrame(data=employers)
@@ -183,7 +180,7 @@ def exec(keyword,location):
         VALUES (%(Job)s, %(Location)s, %(Confidence)s, %(Total_Salary)s, %(Base_Salary)s,%(Additional_Salary)s,%(Avg_Salary)s, %(Date_Added)s, %(Datetime)s)""", overall_salary)
         cursor.executemany("""
         INSERT INTO public.salary_employers (Job, Location, Company, Salary, Datetime)
-        VALUES (%(Job)s, %(Location)s, %(Company)s, %(Salary)s, %(Datetime)s)""", employers)
+        VALUES (%(Job)s, %(Location)s, %(Company)s, %(Salary)s, %(Datetime)s)""", salary_employers)
         connection.commit()
         #db.commit()
         print("Data inserted correctly!")
@@ -195,5 +192,4 @@ def exec(keyword,location):
         print(e)
         return("Error while connecting to PostgreSQL! Redirected to Home")
     driver.quit()
-    display = "New record created successfully! Redirected to Home"
-    return (display)
+    return ("New record created successfully! Redirected to Home")

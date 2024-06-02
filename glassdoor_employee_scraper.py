@@ -140,7 +140,7 @@ def getSalaries(driver,keyword,location):
 def exec(keyword,location):
     service = Service(executable_path='./chromedriver.exe')
     options = webdriver.ChromeOptions()
-    options.setPageLoadStrategy(PageLoadStrategy.NONE)
+    options.page_load_strategy = 'none'
     options.add_argument('--no-sandbox')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--disable-dev-shm-usage')

@@ -138,7 +138,7 @@ def getSalaries(driver,keyword,location):
     return overall_salary, salary_employers
 
 def exec(keyword,location):
-    service = Service(executable_path='./chromedriver.exe')
+    service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
     options.page_load_strategy = 'none'
     options.add_argument('--no-sandbox')
@@ -157,9 +157,8 @@ def exec(keyword,location):
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_argument("--dns-prefetch-disable")
     options.add_experimental_option('useAutomationExtension', False)
-    driver = webdriver.Chrome(options=options)
-    driver.manage().timeouts().setScriptTimeout(360, TimeUnit.SECONDS);
-    driver.manage().timeouts().pageLoadTimeout(360, TimeUnit.SECONDS)
+    driver = webdriver.Chrome(options=options,service=service)
+    driver.set_page_load_timeout(360)
     sleep(3)
     login(driver)
     sleep(5)

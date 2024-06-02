@@ -148,14 +148,17 @@ def exec(keyword,location):
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-browser-side-navigation');
     options.add_argument('start-maximized')
-    options.add_argument('enable-automation')
+    options.add_argument('--enable-automation')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('log-level=3')
     options.add_argument('--remote-debugging-pipe')
     options.add_argument('--disable-infobars')
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option('useAutomationExtension', False)
     driver = webdriver.Chrome(options=options)
     driver.manage().timeouts().setScriptTimeout(360, TimeUnit.SECONDS);
+    driver.manage().timeouts().pageLoadTimeout(360, TimeUnit.SECONDS)
     sleep(3)
     login(driver)
     sleep(5)

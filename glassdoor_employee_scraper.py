@@ -140,18 +140,22 @@ def getSalaries(driver,keyword,location):
 def exec(keyword,location):
     service = Service(executable_path='./chromedriver.exe')
     options = webdriver.ChromeOptions()
+    options.setPageLoadStrategy(PageLoadStrategy.NONE)
     options.add_argument('--no-sandbox')
     options.add_argument('--ignore-certificate-errors')
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--disable-extensions')
     options.add_argument('--disable-gpu')
+    options.add_argument('--disable-browser-side-navigation');
     options.add_argument('start-maximized')
+    options.add_argument('enable-automation')
     options.add_argument('--ignore-certificate-errors-spki-list')
     options.add_argument('--ignore-ssl-errors')
     options.add_argument('log-level=3')
-    options.add_argument('disable-infobars')
     options.add_argument('--remote-debugging-pipe')
+    options.add_argument('--disable-infobars')
     driver = webdriver.Chrome(options=options)
+    driver.manage().timeouts().setScriptTimeout(360, TimeUnit.SECONDS);
     sleep(3)
     login(driver)
     sleep(5)

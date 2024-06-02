@@ -156,7 +156,7 @@ def exec(keyword,location):
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_argument("--dns-prefetch-disable")
     options.add_experimental_option('useAutomationExtension', False)
-    driver = webdriver.Chrome(options=options,service=Service(ChromeDriverManager().install()))
+    driver = webdriver.Chrome(options=options)
     driver.set_page_load_timeout(360)
     sleep(3)
     login(driver)

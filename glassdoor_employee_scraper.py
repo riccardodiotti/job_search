@@ -23,32 +23,33 @@ import os
 
 # Login
 def login(driver):
+    print('trying to login')
     login = open('login.txt') # this is your linkedin account login, store in a seperate text file. I recommend creating a fake account so your real one dosen't get flagged or banned
     line = login.readlines()
     email = line[0]
     password = line[1]
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(2)
     driver.get("https://www.glassdoor.com/index.htm")
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
-    your_element = WebDriverWait(driver, 100,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserEmail")))
+    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserEmail")))
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
     sleep(2)
     eml = driver.find_element(By.ID, "inlineUserEmail")
     eml.send_keys(email)
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
-    your_element = WebDriverWait(driver, 100,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserPassword")))
+    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserPassword")))
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
     sleep(2)
     passwd = driver.find_element(By.ID, "inlineUserPassword")
     passwd.send_keys(password)
     sleep(2)
-    loginbutton = WebDriverWait(driver, 30).until(EC.element_to_be_clickable((By.XPATH,"//button[@type='submit']")))
+    loginbutton = WebDriverWait(driver, 2).until(EC.element_to_be_clickable((By.XPATH,"//button[@type='submit']")))
     driver.execute_script("arguments[0].click();", loginbutton)
 
 def getSalaries(driver,keyword,location):
-    driver.implicitly_wait(10)
+    driver.implicitly_wait(2)
     driver.get("https://www.glassdoor.com/salaries/index.htm")
     sleep(1)
     searchbox = driver.find_element(By.NAME, "typedKeyword")

@@ -140,7 +140,7 @@ def getSalaries(driver,keyword,location):
     return overall_salary, salary_employers
 
 def exec(keyword,location):
-    service = Service(executable_path='./chromedriver.exe')
+    service = Service(executable_path='./geckodriver')
     options = Options()
     options.add_argument('--headless')
     options.add_argument('start-maximized')

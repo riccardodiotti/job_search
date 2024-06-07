@@ -1,8 +1,6 @@
 import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
 from selenium.webdriver import Keys, ActionChains
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import StaleElementReferenceException
@@ -30,15 +28,17 @@ def login(driver):
     password = line[1]
     driver.implicitly_wait(2)
     driver.get("https://www.glassdoor.com/index.htm")
-    ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
-    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserEmail")))
+    ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
+    your_element = WebDriverWait(driver, 10,ignored_exceptions=ignored_exceptions)\
+                        .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserEmail")))
     sleep(2)
     eml = driver.find_element(By.ID, "inlineUserEmail")
     eml.send_keys(email)
-    ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
-    your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions).until(EC.visibility_of_element_located((By.ID, "inlineUserPassword")))
+    ignored_exceptions=(NoSuchElementException,StaleElementReferenceException,)
+    your_element = WebDriverWait(driver, 10,ignored_exceptions=ignored_exceptions)\
+                        .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
     #your_element = WebDriverWait(driver, 2,ignored_exceptions=ignored_exceptions)\
     #                    .until(EC.presence_of_element_located((By.ID, "inlineUserPassword")))
     sleep(2)
@@ -140,10 +140,6 @@ def getSalaries(driver,keyword,location):
     return overall_salary, salary_employers
 
 def exec(keyword,location):
-    service = Service(executable_path='./geckodriver')
-    options = Options()
-    options.add_argument('--headless')
-    options.add_argument('start-maximized')
     #options.add_argument('--no-sandbox')
     #options.add_argument('--ignore-certificate-errors')
     #options.add_argument('--disable-dev-shm-usage')
@@ -153,7 +149,7 @@ def exec(keyword,location):
     #options.add_argument('--ignore-certificate-errors-spki-list')
     #options.add_argument('--ignore-ssl-errors')
     #options.add_argument('--remote-debugging-pipe')
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Chrome()
     sleep(3)
     login(driver)
     sleep(5)
